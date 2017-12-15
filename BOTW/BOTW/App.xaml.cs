@@ -1,4 +1,5 @@
-﻿using BOTW.ViewModels;
+﻿using BOTW.Data;
+using BOTW.ViewModels;
 using BOTW.Views;
 using Microsoft.Practices.Unity;
 using Prism.Unity;
@@ -15,6 +16,9 @@ namespace BOTW
          * This imposes a limitation in which the App class must have a default constructor. 
          * App(IPlatformInitializer initializer = null) cannot be handled by the Activator.
          */
+        private static MovieInfoDatabase database;
+
+
         public App() : this(null) { }
 
         public App(IPlatformInitializer initializer) : base(initializer) { }
@@ -30,6 +34,18 @@ namespace BOTW
         {
             Container.RegisterTypeForNavigation<NavigationPage>();
             Container.RegisterTypeForNavigation<MainPage>();
+        }
+
+        public static MovieInfoDatabase Database
+        {
+            get
+            {
+                if (database == null)
+                {
+                    database = new MovieInfoDatabase("MovieInfoSQLite.db3");
+                }
+                return database;
+            }
         }
     }
 }
