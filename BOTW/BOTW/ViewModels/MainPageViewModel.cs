@@ -27,6 +27,12 @@ namespace BOTW.ViewModels
             get { return _date; }
             set { SetProperty(ref _date, value); }
         }
+        private bool _buttonEnabled;
+        public bool ButtonEnabled
+        {
+            get { return _buttonEnabled; }
+            set { SetProperty(ref _buttonEnabled, value); }
+        }
 
         private MovieInfo _newMovie;
 
@@ -41,6 +47,7 @@ namespace BOTW.ViewModels
         public MainPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
+            ButtonEnabled = true;
             MovieInfoManager = new MovieInfoManager(new RestService());
             Title = "Main Page";
             MovieList = new ObservableCollection<MovieInfo>();
@@ -52,11 +59,13 @@ namespace BOTW.ViewModels
 
         private async void AddMessageToList()
         {
+            ButtonEnabled = false;
             _newMovie = new MovieInfo();
             _newMovie = await MovieInfoManager.GetTasksAsync(Name);
             MovieList.Add(_newMovie);
             //await App.Database.SaveMovieInfoAsync(_newMovie);
             //PopulateMovieList();
+            ButtonEnabled = true;
         }
 
         private async void PopulateMovieList()

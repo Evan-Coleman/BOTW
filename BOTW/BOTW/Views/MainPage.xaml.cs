@@ -12,6 +12,6 @@ namespace BOTW.Views
 		public MainPage ()
 		{
 			InitializeComponent ();
-		}
+        }
 	}
 }

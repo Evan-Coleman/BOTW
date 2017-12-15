@@ -11,7 +11,8 @@
                    HorizontalTextAlignment="Center"/>
         </StackLayout>
         <Button Text="Add Message"
-                Command="{Binding AddMessageToListCommand}"/>
+                Command="{Binding AddMessageToListCommand}"
+                IsEnabled="{Binding ButtonEnabled}"/>
         <ListView ItemsSource="{Binding MovieList}"
                   VerticalOptions="FillAndExpand"
                   HasUnevenRows="True"
