@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BOTW.Data;
 using BOTW.Models;
+using BOTW.Extensions;
 
 namespace BOTW.ViewModels
 {
@@ -52,7 +53,7 @@ namespace BOTW.ViewModels
             Title = "Main Page";
             MovieList = new ObservableCollection<MovieInfo>();
             AddMessageToListCommand = new DelegateCommand(AddMessageToList);
-            //PopulateMovieList();
+            PopulateMovieList();
         }
         #endregion
 
@@ -70,14 +71,13 @@ namespace BOTW.ViewModels
 
         private async void PopulateMovieList()
         {
-            List<MovieInfo> Movies = await App.Database.GetMoviesAsync();
-            foreach (MovieInfo Movie in Movies)
+            var data = await App.Database.GetMoviesAsync();
+
+            foreach(var item in data)
             {
-                MovieList.Add(Movie);
+                MovieList.Add(item);
             }
+            //MovieList = data.ToObservableCollection();
         }
-
-
-
     }
 }

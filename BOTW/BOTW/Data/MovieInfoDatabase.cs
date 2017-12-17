@@ -18,18 +18,22 @@ namespace BOTW.Data
         public MovieInfoDatabase(string dbPath)
         {
             database = new SQLiteAsyncConnection(dbPath);
-            CreateTable();
+            database.CreateTableAsync<MovieInfo>().Wait();
+            //CreateTable();
             Debug.WriteLine("Table created!");
         }
 
-        public async void CreateTable ()
+        public void CreateTable ()
         {
-            await database.CreateTableAsync<MovieInfo>();
+           
         }
 
 
         public Task<List<MovieInfo>> GetMoviesAsync()
+
         {
+            //var data = database.Table<MovieInfo>();
+            //return await data.ToListAsync();
             return database.Table<MovieInfo>().ToListAsync();
         }
 
@@ -42,7 +46,7 @@ namespace BOTW.Data
 
         public Task<int> SaveMovieInfoAsync(MovieInfo movieInfo)
         {
-            if (movieInfo.ID == 0)
+            if (movieInfo.ID != 0)
             {
                 return database.UpdateAsync(movieInfo);
             }
