@@ -19,7 +19,7 @@ namespace BOTW.Droid
     {
         public string GetPath(string fileName)
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             return Path.Combine(path, fileName);
         }
     }

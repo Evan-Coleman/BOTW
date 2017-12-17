@@ -45,7 +45,7 @@ namespace BOTW.Data
                     Movie.Name = MovieList.results[0].title;
                     Movie.MovieDescription = MovieList.results[0].overview;
                     Movie.ReleaseDate = MovieList.results[0].release_date;
-                    Movie.Id = MovieList.results[0].id;
+                    //Movie.Id = MovieList.results[0].id;
                     Movie.VoteCount = MovieList.results[0].vote_count;
                     Movie.VoteAverage = MovieList.results[0].vote_average;
                     Movie.PosterPath += MovieList.results[0].poster_path;

@@ -42,7 +42,7 @@ namespace BOTW
             {
                 if (database == null)
                 {
-                    database = new MovieInfoDatabase("MovieInfoSQLite.db3");
+                    database = new MovieInfoDatabase(DependencyService.Get<IFileHelper>().GetPath("TodoSQLite.db3"));
                 }
                 return database;
             }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,13 @@ namespace BOTW.Data
         public MovieInfoDatabase(string dbPath)
         {
             database = new SQLiteAsyncConnection(dbPath);
-            database.CreateTableAsync<MovieInfo>().Wait();
+            CreateTable();
+            Debug.WriteLine("Table created!");
+        }
+
+        public async void CreateTable ()
+        {
+            await database.CreateTableAsync<MovieInfo>();
         }
 
 

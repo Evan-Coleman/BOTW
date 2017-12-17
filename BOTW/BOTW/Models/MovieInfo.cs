@@ -14,7 +14,6 @@ namespace BOTW.Models
         public string ReleaseDate { get; set; }
         public string MovieDescription { get; set; }
         public string PosterPath { get; set; } = "https://image.tmdb.org/t/p/w185";
-        public int Id { get; set; }
         public int VoteCount { get; set; }
         public float VoteAverage { get; set; }
     }

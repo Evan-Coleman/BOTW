@@ -62,9 +62,9 @@ namespace BOTW.ViewModels
             ButtonEnabled = false;
             _newMovie = new MovieInfo();
             _newMovie = await MovieInfoManager.GetTasksAsync(Name);
-            MovieList.Add(_newMovie);
-            //await App.Database.SaveMovieInfoAsync(_newMovie);
-            //PopulateMovieList();
+            //MovieList.Add(_newMovie);
+            await App.Database.SaveMovieInfoAsync(_newMovie);
+            PopulateMovieList();
             ButtonEnabled = true;
         }
 
