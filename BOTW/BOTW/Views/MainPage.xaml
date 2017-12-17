@@ -16,6 +16,7 @@
         <ListView ItemsSource="{Binding MovieList}"
                   VerticalOptions="FillAndExpand"
                   HasUnevenRows="True"
+                  ItemTapped="OnItemTapped"
         >
             <ListView.ItemTemplate>
                 <DataTemplate>

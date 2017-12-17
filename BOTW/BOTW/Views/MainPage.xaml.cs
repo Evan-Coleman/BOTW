@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BOTW.Models;
+using BOTW.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +15,10 @@ namespace BOTW.Views
 		{
 			InitializeComponent ();
         }
-	}
+
+        private async void OnItemTapped(object sender, ItemTappedEventArgs args)
+        {
+            ((MainPageViewModel)this.BindingContext).MovieSelectedCommand.Execute((MovieInfo)args.Item);
+        }
+    }
 }
