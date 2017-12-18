@@ -17,13 +17,24 @@ namespace BOTW.ViewModels
             get { return _movie; }
             set { SetProperty(ref _movie, value); }
         }
+        public DelegateCommand DeleteMovieCommand { get; set; }
 
         public MovieDetailPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
             _navigationService = navigationService;
+            DeleteMovieCommand = new DelegateCommand(DeleteMovie);
         }
 
+        private async void DeleteMovie()
+        {
+            await App.Database.DeleteMovieInfoAsync(Movie);
+            var p = new NavigationParameters();
+            p.Add("DeletedMovieInfo", Movie);
+            await _navigationService.GoBackToRootAsync(p);
+
+
+        }
 
         public override void OnNavigatingTo(NavigationParameters parameters)
         {

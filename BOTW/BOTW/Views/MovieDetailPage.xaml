@@ -5,22 +5,30 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="BOTW.Views.MovieDetailPage">
 
-    <StackLayout Orientation="Horizontal">
+
+    
+    <StackLayout >
         <Image Source="{Binding Movie.PosterPath}"
-               HeightRequest="80"
-               WidthRequest="80"></Image>
-        <StackLayout >
-            <StackLayout Orientation="Horizontal">
-                <Label Text ="Title: "/>
-                <Label Text="{Binding Movie.Name}"/>
-                <Label Text ="Release Date: "/>
-                <Label Text="{Binding Movie.ReleaseDate}"/>
-                <Label Text ="Number of votes: "/>
-                <Label Text="{Binding Movie.VoteCount}"/>
-                <Label Text ="Average vote: "/>
-                <Label Text="{Binding Movie.VoteAverage}"/>
-            </StackLayout>
-            <Label Text="{Binding Movie.MovieDescription}"/>
+               HorizontalOptions="FillAndExpand"
+               HeightRequest="150"
+               Aspect="AspectFit"
+               />
+        <Label Text="{Binding Path=Movie.Name, StringFormat='Title: {0}'}"
+               HorizontalOptions="CenterAndExpand"/>
+        <Label Text="{Binding Path=Movie.ReleaseDate, StringFormat='Release Date: {0}'}"
+               HorizontalOptions="CenterAndExpand"/>
+        <Label Text="{Binding Path=Movie.VoteCount, StringFormat='Number of Votes: {0}'}"
+               HorizontalOptions="CenterAndExpand"/>
+        <Label Text="{Binding Path=Movie.VoteAverage, StringFormat='Average Vote: {0}'}"
+               HorizontalOptions="CenterAndExpand"/>
+        <Label Text="{Binding Movie.MovieDescription}"
+               HorizontalOptions="CenterAndExpand"/>
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Edit"
+                    HorizontalOptions="CenterAndExpand"/>
+            <Button Text="Delete"
+                    HorizontalOptions="CenterAndExpand"
+                    Command="{Binding DeleteMovieCommand}"/>
         </StackLayout>
     </StackLayout>
 

@@ -65,11 +65,10 @@ namespace BOTW.ViewModels
             ButtonEnabled = false;
             _newMovie = new MovieInfo();
             _newMovie = await MovieInfoManager.GetTasksAsync(Name);
-            // Add movie to memory collection
-            //MovieList.Add(_newMovie);
             // Add movie to SQLite database
             await App.Database.SaveMovieInfoAsync(_newMovie);
-            PopulateMovieList();
+            // Add movie to memory collection
+            MovieList.Add(_newMovie);
             ButtonEnabled = true;
         }
 
@@ -90,5 +89,15 @@ namespace BOTW.ViewModels
             }
             //MovieList = data.ToObservableCollection();
         }
+
+        public override void OnNavigatingTo(NavigationParameters parameters)
+        {
+            if (parameters.ContainsKey("DeletedMovieInfo"))
+            {
+                MovieList.Remove((MovieInfo)parameters["DeletedMovieInfo"]);
+            }
+        }
+
+
     }
 }

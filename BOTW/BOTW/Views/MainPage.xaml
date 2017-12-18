@@ -2,9 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BOTW.Views.MainPage"
-             Title="{Binding Title}"
-             BackgroundColor="#33302E">
-    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+             Title="{Binding Title}">
+    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                 Padding="10">
         <StackLayout Orientation="Horizontal">
             <Entry Placeholder="Name" Text="{Binding Name}"
                    HorizontalOptions="FillAndExpand"
@@ -17,6 +17,7 @@
                   VerticalOptions="FillAndExpand"
                   HasUnevenRows="True"
                   ItemTapped="OnItemTapped"
+                  x:Name="bob"
         >
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -28,14 +29,16 @@
                             <StackLayout >
 
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text ="Title: "/>
-                                    <Label Text="{Binding Name}"/>
-                                    <Label Text ="Release Date: "/>
-                                    <Label Text="{Binding ReleaseDate}"/>
-                                    <Label Text ="Number of votes: "/>
-                                    <Label Text="{Binding VoteCount}"/>
-                                    <Label Text ="Average vote: "/>
-                                    <Label Text="{Binding VoteAverage}"/>
+                                    <Label Text="{Binding Path=Name, StringFormat='Title: {0}'}"
+                                           HorizontalOptions="StartAndExpand"/>
+                                    <Label Text="{Binding Path=ReleaseDate, StringFormat='Date: {0}'}"
+                                           HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Path=VoteCount, StringFormat='Votes: {0}'}"
+                                           HorizontalOptions="StartAndExpand"/>
+                                    <Label Text="{Binding Path=VoteAverage, StringFormat='Avg Vote: {0}'}"
+                                           HorizontalOptions="EndAndExpand"/>
                                 </StackLayout>
                                 <Label Text="{Binding MovieDescription}"/>
                             </StackLayout>
