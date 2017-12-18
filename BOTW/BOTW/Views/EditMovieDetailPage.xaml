@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="BOTW.Views.MovieDetailPage">
+             x:Class="BOTW.Views.EditMovieDetailPage">
 
     <StackLayout >
         <Image Source="{Binding Movie.PosterPath}"
@@ -11,23 +11,23 @@
                HeightRequest="150"
                Aspect="AspectFit"
                />
-        <Label Text="{Binding Path=Movie.Name, StringFormat='Title: {0}'}"
+        <Entry Text="{Binding Movie.Name}"
                HorizontalOptions="CenterAndExpand"/>
-        <Label Text="{Binding Path=Movie.ReleaseDate, StringFormat='Release Date: {0}'}"
+            <Entry Text="{Binding Movie.ReleaseDate}"
                HorizontalOptions="CenterAndExpand"/>
-        <Label Text="{Binding Path=Movie.VoteCount, StringFormat='Number of Votes: {0}'}"
+            <Entry Text="{Binding Movie.VoteCount}"
                HorizontalOptions="CenterAndExpand"/>
-        <Label Text="{Binding Path=Movie.VoteAverage, StringFormat='Average Vote: {0}'}"
+            <Entry Text="{Binding Movie.VoteAverage}"
                HorizontalOptions="CenterAndExpand"/>
-        <Label Text="{Binding Movie.MovieDescription}"
+            <Editor Text="{Binding Movie.MovieDescription}"
                HorizontalOptions="CenterAndExpand"/>
         <StackLayout Orientation="Horizontal">
-            <Button Text="Edit"
+            <Button Text="Save"
                     HorizontalOptions="CenterAndExpand"
-                    Command="{Binding EditMovieCommand}"/>
-            <Button Text="Delete"
+                    Command="{Binding SaveCommand}"/>
+            <Button Text="Cancel"
                     HorizontalOptions="CenterAndExpand"
-                    Command="{Binding DeleteMovieCommand}"/>
+                    Command="{Binding CancelCommand}"/>
         </StackLayout>
     </StackLayout>
 

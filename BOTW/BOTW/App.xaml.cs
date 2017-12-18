@@ -35,6 +35,7 @@ namespace BOTW
             Container.RegisterTypeForNavigation<NavigationPage>();
             Container.RegisterTypeForNavigation<MainPage>();
             Container.RegisterTypeForNavigation<MovieDetailPage>();
+            Container.RegisterTypeForNavigation<EditMovieDetailPage>();
         }
 
         public static MovieInfoDatabase Database

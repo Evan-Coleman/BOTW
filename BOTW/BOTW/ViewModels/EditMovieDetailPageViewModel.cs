@@ -8,52 +8,53 @@ using System.Linq;
 
 namespace BOTW.ViewModels
 {
-	public class MovieDetailPageViewModel : ViewModelBase
+	public class EditMovieDetailPageViewModel : ViewModelBase
 	{
         readonly INavigationService _navigationService;
+
         private MovieInfo _movie;
         public MovieInfo Movie
         {
             get { return _movie; }
             set { SetProperty(ref _movie, value); }
         }
-        public DelegateCommand DeleteMovieCommand { get; set; }
-        public DelegateCommand EditMovieCommand { get; set; }
+        private MovieInfo _preEditMovie;
+        public DelegateCommand SaveCommand { get; set; }
+        public DelegateCommand CancelCommand { get; set; }
 
-
-        public MovieDetailPageViewModel(INavigationService navigationService)
+        public EditMovieDetailPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
             _navigationService = navigationService;
-            DeleteMovieCommand = new DelegateCommand(DeleteMovie);
-            EditMovieCommand = new DelegateCommand(EditMovie);
+            SaveCommand = new DelegateCommand(SaveEdit);
+            CancelCommand = new DelegateCommand(CancelEdit);
         }
 
 
-        private async void DeleteMovie()
+        private async void SaveEdit()
         {
-            await App.Database.DeleteMovieInfoAsync(Movie);
+            await App.Database.SaveMovieInfoAsync(Movie);
             var p = new NavigationParameters();
-            p.Add("DeletedMovieInfo", Movie);
+            p.Add("EditedMovieInfo", _preEditMovie);
+            p.Add("UpdatedMovieInfo", Movie);
             await _navigationService.GoBackToRootAsync(p);
 
 
         }
 
-        private async void EditMovie()
+        private async void CancelEdit()
         {
-            await App.Database.DeleteMovieInfoAsync(Movie);
-            var p = new NavigationParameters();
-            p.Add("MovieInfo", Movie);
-            await _navigationService.NavigateAsync("EditMovieDetailPage", p);
-
-
+            await _navigationService.GoBackAsync();
         }
+
 
         public override void OnNavigatingTo(NavigationParameters parameters)
         {
             if (parameters.ContainsKey("MovieInfo"))
+            {
                 Movie = (MovieInfo)parameters["MovieInfo"];
+                _preEditMovie = Movie;
+            }
         }
     }
 }

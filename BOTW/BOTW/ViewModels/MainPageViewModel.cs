@@ -37,9 +37,11 @@ namespace BOTW.ViewModels
 
         private MovieInfo _newMovie;
         public ObservableCollection<MovieInfo> MovieList { get; set; }
-        public DelegateCommand AddMessageToListCommand { get; set; }
+
         public static MovieInfoManager MovieInfoManager { get; private set; }
         readonly INavigationService _navigationService;
+
+        public DelegateCommand AddMessageToListCommand { get; set; }
         DelegateCommand<MovieInfo> _movieSelectedCommand;
         public DelegateCommand<MovieInfo> MovieSelectedCommand => _movieSelectedCommand != null ? _movieSelectedCommand : (_movieSelectedCommand = new DelegateCommand<MovieInfo>(MovieSelected));
 
@@ -59,7 +61,7 @@ namespace BOTW.ViewModels
         }
         #endregion
 
-
+        #region Methods
         private async void AddMessageToList()
         {
             ButtonEnabled = false;
@@ -87,6 +89,8 @@ namespace BOTW.ViewModels
             {
                 MovieList.Add(item);
             }
+
+            //TODO: Figure out why this isn't working
             //MovieList = data.ToObservableCollection();
         }
 
@@ -96,7 +100,14 @@ namespace BOTW.ViewModels
             {
                 MovieList.Remove((MovieInfo)parameters["DeletedMovieInfo"]);
             }
+            if (parameters.ContainsKey("EditedMovieInfo"))
+            {
+                MovieList.Remove((MovieInfo)parameters["EditedMovieInfo"]);
+                MovieList.Add((MovieInfo)parameters["UpdatedMovieInfo"]);
+                App.Database.SaveMovieInfoAsync((MovieInfo)parameters["EditedMovieInfo"]);
+            }
         }
+        #endregion
 
 
     }
