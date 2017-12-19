@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using BOTW.Data;
 using BOTW.Models;
 using BOTW.Extensions;
+using System.Diagnostics;
 
 namespace BOTW.ViewModels
 {
@@ -34,9 +35,14 @@ namespace BOTW.ViewModels
             get { return _buttonEnabled; }
             set { SetProperty(ref _buttonEnabled, value); }
         }
+        private ObservableCollection<MovieInfo> _movieList;
+        public ObservableCollection<MovieInfo> MovieList
+        {
+            get { return _movieList; }
+            set { SetProperty(ref _movieList, value); }
+        }
 
         private MovieInfo _newMovie;
-        public ObservableCollection<MovieInfo> MovieList { get; set; }
 
         public static MovieInfoManager MovieInfoManager { get; private set; }
         readonly INavigationService _navigationService;
@@ -84,17 +90,19 @@ namespace BOTW.ViewModels
         private async void PopulateMovieList()
         {
             var data = await App.Database.GetMoviesAsync();
-
+            
             foreach(var item in data)
             {
                 MovieList.Add(item);
             }
-
+            
             //TODO: Figure out why this isn't working
             //MovieList = data.ToObservableCollection();
+
+
         }
 
-        public override void OnNavigatingTo(NavigationParameters parameters)
+        public async override void OnNavigatingTo(NavigationParameters parameters)
         {
             if (parameters.ContainsKey("DeletedMovieInfo"))
             {
@@ -102,9 +110,8 @@ namespace BOTW.ViewModels
             }
             if (parameters.ContainsKey("EditedMovieInfo"))
             {
-                MovieList.Remove((MovieInfo)parameters["EditedMovieInfo"]);
+                MovieList.Remove((MovieInfo)parameters["UpdatedMovieInfo"]);
                 MovieList.Add((MovieInfo)parameters["UpdatedMovieInfo"]);
-                App.Database.SaveMovieInfoAsync((MovieInfo)parameters["EditedMovieInfo"]);
             }
         }
         #endregion

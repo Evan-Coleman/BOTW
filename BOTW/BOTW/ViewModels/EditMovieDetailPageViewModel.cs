@@ -38,8 +38,6 @@ namespace BOTW.ViewModels
             p.Add("EditedMovieInfo", _preEditMovie);
             p.Add("UpdatedMovieInfo", Movie);
             await _navigationService.GoBackToRootAsync(p);
-
-
         }
 
         private async void CancelEdit()
@@ -52,8 +50,16 @@ namespace BOTW.ViewModels
         {
             if (parameters.ContainsKey("MovieInfo"))
             {
+                Movie = new MovieInfo();
                 Movie = (MovieInfo)parameters["MovieInfo"];
-                _preEditMovie = Movie;
+                _preEditMovie = new MovieInfo();
+                _preEditMovie.ID = Movie.ID;
+                _preEditMovie.Name = Movie.Name;
+                _preEditMovie.ReleaseDate = Movie.ReleaseDate;
+                _preEditMovie.MovieDescription = Movie.MovieDescription;
+                _preEditMovie.PosterPath = Movie.PosterPath;
+                _preEditMovie.VoteCount = Movie.VoteCount;
+                _preEditMovie.VoteAverage = Movie.VoteAverage;
             }
         }
     }

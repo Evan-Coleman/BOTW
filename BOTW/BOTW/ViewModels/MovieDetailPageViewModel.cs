@@ -42,12 +42,9 @@ namespace BOTW.ViewModels
 
         private async void EditMovie()
         {
-            await App.Database.DeleteMovieInfoAsync(Movie);
             var p = new NavigationParameters();
             p.Add("MovieInfo", Movie);
             await _navigationService.NavigateAsync("EditMovieDetailPage", p);
-
-
         }
 
         public override void OnNavigatingTo(NavigationParameters parameters)

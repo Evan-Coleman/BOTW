@@ -19,21 +19,11 @@ namespace BOTW.Data
         {
             database = new SQLiteAsyncConnection(dbPath);
             database.CreateTableAsync<MovieInfo>().Wait();
-            //CreateTable();
-            Debug.WriteLine("Table created!");
         }
-
-        public void CreateTable ()
-        {
-           
-        }
-
 
         public Task<List<MovieInfo>> GetMoviesAsync()
 
         {
-            //var data = database.Table<MovieInfo>();
-            //return await data.ToListAsync();
             return database.Table<MovieInfo>().ToListAsync();
         }
 
