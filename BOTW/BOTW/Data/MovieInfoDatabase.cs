@@ -7,14 +7,19 @@ namespace BOTW.Data
 {
     public class MovieInfoDatabase
     {
+        #region Fields
         private readonly SQLiteAsyncConnection database;
+        #endregion
 
+        #region Constructor
         public MovieInfoDatabase(string dbPath)
         {
             database = new SQLiteAsyncConnection(dbPath);
             database.CreateTableAsync<MovieInfo>().Wait();
         }
+        #endregion
 
+        #region Methods
         public Task<List<MovieInfo>> GetMoviesAsync()
 
         {
@@ -44,5 +49,6 @@ namespace BOTW.Data
         {
             return database.DeleteAsync(movieInfo);
         }
+        #endregion
     }
 }

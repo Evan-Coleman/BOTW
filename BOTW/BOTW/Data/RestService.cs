@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace BOTW.Data
 {
     public class RestService : IRestService
     {
+        #region Fields
         private HttpClient client;
         // TODO: Hide from github
         private string apiKey = "0b613f3d5130e4f3ab42784c6266145a";
@@ -19,13 +21,17 @@ namespace BOTW.Data
         private string RestUrlPartTwo = "&language=en-US&query=";
         private string RestUrlPartThree = "&page=1&include_adult=false";
         private string RestUrlComplete;
+        #endregion
 
+        #region Constructor
         public RestService()
         {
             client = new HttpClient();
             client.MaxResponseContentBufferSize = 256000;
         }
+        #endregion
 
+        #region Methods
         public async Task<MovieInfo> RefreshDataAsync(string Name)
         {
             Movie = new MovieInfo();
@@ -67,6 +73,7 @@ namespace BOTW.Data
         {
             throw new NotImplementedException();
         }
+        #endregion
 
         #region API CLASSES
         public class Rootobject

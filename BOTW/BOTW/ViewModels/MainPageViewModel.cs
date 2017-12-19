@@ -10,6 +10,8 @@ namespace BOTW.ViewModels
     public class MainPageViewModel : ViewModelBase
     {
         #region Fields
+        protected readonly INavigationService _navigationService;
+
         private string _name;
         public string Name
         {
@@ -34,16 +36,12 @@ namespace BOTW.ViewModels
             get { return _movieList; }
             set { SetProperty(ref _movieList, value); }
         }
-
         private MovieInfo _newMovie;
-
         public static MovieInfoManager MovieInfoManager { get; private set; }
-        protected readonly INavigationService _navigationService;
 
         public DelegateCommand AddMessageToListCommand { get; set; }
         public DelegateCommand<MovieInfo> _movieSelectedCommand;
         public DelegateCommand<MovieInfo> MovieSelectedCommand => _movieSelectedCommand != null ? _movieSelectedCommand : (_movieSelectedCommand = new DelegateCommand<MovieInfo>(MovieSelected));
-
         #endregion
 
         #region Constructor
@@ -99,7 +97,5 @@ namespace BOTW.ViewModels
             }
         }
         #endregion
-
-
     }
 }

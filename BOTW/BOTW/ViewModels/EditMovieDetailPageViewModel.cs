@@ -6,6 +6,7 @@ namespace BOTW.ViewModels
 {
     public class EditMovieDetailPageViewModel : ViewModelBase
 	{
+        #region Fields
         protected readonly INavigationService _navigationService;
 
         private MovieInfo _movie;
@@ -14,10 +15,14 @@ namespace BOTW.ViewModels
             get { return _movie; }
             set { SetProperty(ref _movie, value); }
         }
+
         private MovieInfo _preEditMovie;
+
         public DelegateCommand SaveCommand { get; set; }
         public DelegateCommand CancelCommand { get; set; }
+        #endregion
 
+        #region Constructor
         public EditMovieDetailPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
@@ -25,8 +30,9 @@ namespace BOTW.ViewModels
             SaveCommand = new DelegateCommand(SaveEdit);
             CancelCommand = new DelegateCommand(CancelEdit);
         }
+        #endregion
 
-
+        #region Methods
         private async void SaveEdit()
         {
             await App.Database.SaveMovieInfoAsync(Movie);
@@ -58,5 +64,6 @@ namespace BOTW.ViewModels
                 _preEditMovie.VoteAverage = Movie.VoteAverage;
             }
         }
+        #endregion
     }
 }

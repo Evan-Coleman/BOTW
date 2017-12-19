@@ -6,17 +6,21 @@ namespace BOTW.ViewModels
 {
     public class MovieDetailPageViewModel : ViewModelBase
 	{
+        #region Fields
         protected readonly INavigationService _navigationService;
+
         private MovieInfo _movie;
         public MovieInfo Movie
         {
             get { return _movie; }
             set { SetProperty(ref _movie, value); }
         }
+
         public DelegateCommand DeleteMovieCommand { get; set; }
         public DelegateCommand EditMovieCommand { get; set; }
+        #endregion
 
-
+        #region Constructor
         public MovieDetailPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
@@ -24,8 +28,9 @@ namespace BOTW.ViewModels
             DeleteMovieCommand = new DelegateCommand(DeleteMovie);
             EditMovieCommand = new DelegateCommand(EditMovie);
         }
+        #endregion
 
-
+        #region Methods
         private async void DeleteMovie()
         {
             await App.Database.DeleteMovieInfoAsync(Movie);
@@ -48,5 +53,6 @@ namespace BOTW.ViewModels
             if (parameters.ContainsKey("MovieInfo"))
                 Movie = (MovieInfo)parameters["MovieInfo"];
         }
+        #endregion
     }
 }
