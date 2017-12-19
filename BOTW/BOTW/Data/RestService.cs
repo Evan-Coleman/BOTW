@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using BOTW.Models;
 using Newtonsoft.Json;
@@ -13,7 +10,8 @@ namespace BOTW.Data
     public class RestService : IRestService
     {
         private HttpClient client;
-        string apiKey = "0b613f3d5130e4f3ab42784c6266145a";
+        // TODO: Hide from github
+        private string apiKey = "0b613f3d5130e4f3ab42784c6266145a";
 
         private MovieInfo Movie;
 
@@ -44,8 +42,8 @@ namespace BOTW.Data
 
                     Movie.Name = MovieList.results[0].title;
                     Movie.MovieDescription = MovieList.results[0].overview;
-                    Movie.ReleaseDate = MovieList.results[0].release_date;
-                    //Movie.Id = MovieList.results[0].id;
+                    // Formatting date to my liking
+                    Movie.ReleaseDate = string.Format("{0}-{1}-{2}", MovieList.results[0].release_date.Substring(5,2), MovieList.results[0].release_date.Substring(8, 2), MovieList.results[0].release_date.Substring(0, 4));
                     Movie.VoteCount = MovieList.results[0].vote_count;
                     Movie.VoteAverage = MovieList.results[0].vote_average;
                     Movie.PosterPath += MovieList.results[0].poster_path;
@@ -53,22 +51,22 @@ namespace BOTW.Data
             }
             catch (Exception ex)
             {
+                throw new Exception("Not able to connect: " + ex.Message);
                 Debug.WriteLine(@"				ERROR {0}", ex.Message);
             }
 
             return Movie;
         }
 
+        // Keeping for potential future use
         public Task SaveMovieInfoAsync(MovieInfo Movie, bool isNewItem)
         {
             throw new NotImplementedException();
         }
-
         public Task DeleteMovieInfoAsync(string id)
         {
             throw new NotImplementedException();
         }
-
 
         #region API CLASSES
         public class Rootobject

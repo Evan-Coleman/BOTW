@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BOTW.Models;
-using Prism.Services;
 using SQLite;
-using Xamarin.Forms;
 
 namespace BOTW.Data
 {

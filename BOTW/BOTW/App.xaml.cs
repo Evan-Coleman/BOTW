@@ -1,7 +1,5 @@
 ﻿using BOTW.Data;
-using BOTW.ViewModels;
 using BOTW.Views;
-using Microsoft.Practices.Unity;
 using Prism.Unity;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

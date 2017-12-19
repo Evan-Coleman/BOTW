@@ -1,16 +1,9 @@
 ﻿using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BOTW.Data;
 using BOTW.Models;
 using BOTW.Extensions;
-using System.Diagnostics;
 
 namespace BOTW.ViewModels
 {
@@ -45,10 +38,10 @@ namespace BOTW.ViewModels
         private MovieInfo _newMovie;
 
         public static MovieInfoManager MovieInfoManager { get; private set; }
-        readonly INavigationService _navigationService;
+        protected readonly INavigationService _navigationService;
 
         public DelegateCommand AddMessageToListCommand { get; set; }
-        DelegateCommand<MovieInfo> _movieSelectedCommand;
+        public DelegateCommand<MovieInfo> _movieSelectedCommand;
         public DelegateCommand<MovieInfo> MovieSelectedCommand => _movieSelectedCommand != null ? _movieSelectedCommand : (_movieSelectedCommand = new DelegateCommand<MovieInfo>(MovieSelected));
 
         #endregion
@@ -90,16 +83,7 @@ namespace BOTW.ViewModels
         private async void PopulateMovieList()
         {
             var data = await App.Database.GetMoviesAsync();
-            
-            foreach(var item in data)
-            {
-                MovieList.Add(item);
-            }
-            
-            //TODO: Figure out why this isn't working
-            //MovieList = data.ToObservableCollection();
-
-
+            MovieList = data.ToObservableCollection();
         }
 
         public async override void OnNavigatingTo(NavigationParameters parameters)

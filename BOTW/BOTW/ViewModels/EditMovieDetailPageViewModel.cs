@@ -1,16 +1,12 @@
 ﻿using BOTW.Models;
 using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace BOTW.ViewModels
 {
-	public class EditMovieDetailPageViewModel : ViewModelBase
+    public class EditMovieDetailPageViewModel : ViewModelBase
 	{
-        readonly INavigationService _navigationService;
+        protected readonly INavigationService _navigationService;
 
         private MovieInfo _movie;
         public MovieInfo Movie
